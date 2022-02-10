@@ -1,4 +1,5 @@
 import "./article.less";
+
 // This is the data we will be using to create our articles. Look at it, then proceed to line 93.
 // OPTIONAL: if you're feeling adventurous, try to make this data an export from a different module, and import it here.
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
@@ -116,29 +117,39 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
-
-function articleMaker({ articleArr }) {
+function articleMaker(articleObj) {
   const articleDiv = document.createElement("div");
   const articleTitle = document.createElement("h2");
   const articleDate = document.createElement("p");
   const articleP1 = document.createElement("p");
   const articleP2 = document.createElement("p");
   const articleP3 = document.createElement("p");
-  const articleSpan = document.createElement("span");
-
-  articleDiv.appendChild(articleDiv);
-  articleDiv.appendChild(articleTitle);
-  articleTitle.appendChild(articleDate);
-  articleTitle.appendChild(articleP1);
-  articleTitle.appendChild(articleP2);
-  articleTitle.appendChild(articleP3);
-  articleTitle.appendChild(articleSpan);
+  const articleButton = document.createElement("span");
 
   articleDiv.classList.add("article");
   articleDate.classList.add("date");
-  span.classList.add("expandButton");
-  articleDiv.classList.toggle("article-open");
-  span.expandButton.addEventListener("click", (event) => {});
+  articleButton.classList.add("expandButton");
 
+  articleDiv.appendChild(articleTitle);
+  articleDiv.appendChild(articleDate);
+  articleDiv.appendChild(articleP1);
+  articleDiv.appendChild(articleP2);
+  articleDiv.appendChild(articleP3);
+  articleDiv.appendChild(articleButton);
+
+  articleTitle.textContent = articleObj.title;
+  articleDate.textContent = articleObj.date;
+  articleP1.textContent = articleObj.firstParagraph;
+  articleP2.textContent = articleObj.secondParagraph;
+  articleP3.textContent = articleObj.thirdParagraph;
+  articleButton.textContent = "+";
+
+  articleButton.addEventListener("click", () => {
+    articleDiv.classList.toggle("article-open");
+  });
   return articleDiv;
 }
+
+const articlesDiv = document.querySelector("div.articles");
+const articleList = articleMaker(data[0]);
+articlesDiv.appendChild(articleList);
